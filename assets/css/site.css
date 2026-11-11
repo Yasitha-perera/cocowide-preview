@@ -711,3 +711,20 @@ dialog.rev-dialog .panel { position: relative; max-height: 92vh; overflow-y: aut
 @media (max-width: 960px) {
   .intro-bg::before { background: linear-gradient(180deg, rgba(12, 31, 19, 0) 0%, rgba(12, 31, 19, 0) 88%, var(--bg-2) 100%), rgba(5, 18, 9, 0.9); }
 }
+
+/* footer: client's own pattern design (logo marks on dark green with a lime glow along the top) */
+.footer {
+  background: #061309 url("../../wp-content/uploads/2026/11/footer-bg.jpg") center top / cover no-repeat;
+}
+.footer::before, .footer::after { display: none; }
+/* a light dark layer over the footer pattern keeps the small text easy to read */
+.footer { background-image: linear-gradient(180deg, rgba(3, 12, 6, 0.18) 0%, rgba(3, 12, 6, 0.42) 100%), url("../../wp-content/uploads/2026/11/footer-bg.jpg"); }
+
+/* footer pattern: the picture sits on its own layer so it can be made see-through (lower opacity = fainter) */
+.footer { background: #061309; }
+.footer::before {
+  display: block; content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("../../wp-content/uploads/2026/11/footer-bg.jpg") center top / cover no-repeat;
+  opacity: 0.4;
+  -webkit-mask-image: none; mask-image: none;
+}
