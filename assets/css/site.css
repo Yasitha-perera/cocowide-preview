@@ -677,3 +677,37 @@ dialog.rev-dialog .panel { position: relative; max-height: 92vh; overflow-y: aut
 @media (max-width: 960px) {
   .intro-bg::before { background: linear-gradient(180deg, rgba(12, 31, 19, 0) 0%, rgba(12, 31, 19, 0) 88%, var(--bg-2) 100%), rgba(5, 18, 9, 0.85); }
 }
+
+/* intro photo: curved top edge that overlaps the bottom of the hero */
+.intro-bg { margin-top: -72px; z-index: 1; overflow: hidden; border-radius: 50% 50% 0 0 / 72px 72px 0 0; padding-top: calc(clamp(4rem, 9vw, 7rem) + 72px); }
+
+/* intro photo: slanted top edge instead of the curve */
+.intro-bg { margin-top: -64px; border-radius: 0; clip-path: polygon(0 64px, 100% 0, 100% 100%, 0 100%); padding-top: calc(clamp(4rem, 9vw, 7rem) + 64px); }
+
+/* intro photo: lighter overlay so the picture shows more */
+.intro-bg::before {
+  background:
+    linear-gradient(180deg, rgba(12, 31, 19, 0) 0%, rgba(12, 31, 19, 0) 88%, var(--bg-2) 100%),
+    linear-gradient(90deg, rgba(5, 18, 9, 0.82) 0%, rgba(5, 18, 9, 0.62) 55%, rgba(5, 18, 9, 0.3) 100%);
+}
+@media (max-width: 960px) {
+  .intro-bg::before { background: linear-gradient(180deg, rgba(12, 31, 19, 0) 0%, rgba(12, 31, 19, 0) 88%, var(--bg-2) 100%), rgba(5, 18, 9, 0.7); }
+}
+
+/* About Us: the two partner logos sit inside the bottom of the photo */
+.photo { position: relative; }
+.photo-logos { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.5rem 0.9rem; background: rgba(255, 255, 255, 0.94); border-radius: 0; box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25); }
+.photo-logos img { width: auto; height: 62px; flex: 0 1 auto; object-fit: contain; }
+.photo-logos .plus { font-size: 1.6rem; line-height: 1; color: var(--forest); }
+@media (max-width: 420px) { .photo-logos img { height: 48px; } }
+
+/* intro photo: darker overlay (the photo is more subdued behind the text) */
+.intro-bg::before {
+  background:
+    linear-gradient(180deg, rgba(12, 31, 19, 0) 0%, rgba(12, 31, 19, 0) 88%, var(--bg-2) 100%),
+    linear-gradient(90deg, rgba(5, 18, 9, 0.95) 0%, rgba(5, 18, 9, 0.86) 55%, rgba(5, 18, 9, 0.68) 100%);
+}
+@media (max-width: 960px) {
+  .intro-bg::before { background: linear-gradient(180deg, rgba(12, 31, 19, 0) 0%, rgba(12, 31, 19, 0) 88%, var(--bg-2) 100%), rgba(5, 18, 9, 0.9); }
+}
