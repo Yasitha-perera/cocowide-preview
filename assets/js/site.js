@@ -170,7 +170,8 @@
   /* gallery filter + load more */
   var grid = $("[data-gallery]");
   if (grid) {
-    var items = $$("li", grid), pills = $$(".pill[data-filter]"), more = $(".more");
+    var scope = grid.closest("[data-gallery-block]") || doc;
+    var items = $$("li", grid), pills = $$(".pill[data-filter]", scope), more = $(".more", scope);
     var PAGE = 12, limit = PAGE, cur2 = "*";
     var render = function () {
       var shown = 0, total = 0;
@@ -191,6 +192,33 @@
     });
     if (more) $("button", more).addEventListener("click", function () { limit += PAGE; render(); });
     render();
+  }
+
+  /* blog: category filter + load more; the first visible article is shown as the large featured card */
+  var bgrid = $("[data-blog-grid]");
+  if (bgrid) {
+    var bitems = $$("li", bgrid), bpills = $$(".pill[data-blog-filter]"), bmore = $("[data-blog-more]");
+    var BFIRST = 7, BSTEP = 6, blimit = BFIRST, bcur = "*";
+    var brender = function () {
+      var shown = 0, total = 0;
+      bitems.forEach(function (li) {
+        var m = bcur === "*" || li.getAttribute("data-cat") === bcur;
+        if (m) total++;
+        var v = m && shown < blimit; if (v) shown++;
+        li.hidden = !v;
+        li.classList.toggle("is-feature", v && shown === 1);
+      });
+      if (bmore) bmore.hidden = shown >= total;
+    };
+    bpills.forEach(function (p) {
+      p.addEventListener("click", function () {
+        bcur = p.getAttribute("data-blog-filter"); blimit = BFIRST;
+        bpills.forEach(function (x) { x.setAttribute("aria-pressed", String(x === p)); });
+        brender();
+      });
+    });
+    if (bmore) $("button", bmore).addEventListener("click", function () { blimit += BSTEP; brender(); });
+    brender();
   }
 
   /* reviews: the line moves by CSS and stops while the mouse is on a card; dialog for the form */
