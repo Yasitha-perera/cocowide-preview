@@ -728,3 +728,42 @@ dialog.rev-dialog .panel { position: relative; max-height: 92vh; overflow-y: aut
   opacity: 0.4;
   -webkit-mask-image: none; mask-image: none;
 }
+
+/* header: bigger logo */
+.nav-inner { height: 94px; }
+.nav.scrolled .nav-inner { height: 76px; }
+.nav .logo img { height: 63px; transition: height 0.3s; }
+.nav.scrolled .logo img { height: 50px; }
+@media (max-width: 960px) {
+  .nav-inner { height: 78px; }
+  .nav.scrolled .nav-inner { height: 66px; }
+  .nav .logo img { height: 48px; }
+  .nav.scrolled .logo img { height: 42px; }
+}
+
+/* the "rev" in "split rev" only flips the columns; it must not pick up the review-card look */
+.split.rev { background: none; border: 0; border-radius: 0; box-shadow: none; padding: 0; }
+
+/* lightbox: fill exactly the visible window (100vw is wider than the page when a scrollbar shows, which pushed the
+   close and next buttons too far right / under the scrollbar) */
+dialog.lb { position: fixed; inset: 0; width: auto; height: auto; max-width: none; max-height: none; overflow: hidden; }
+dialog.lb[open] { box-sizing: border-box; }
+.lb-close { top: 1rem; right: 1rem; }
+.lb-next { right: 1rem; }
+.lb-prev { left: 1rem; }
+@media (max-width: 560px) {
+  .lb-btn { width: 42px; height: 42px; }
+  .lb-close { top: 0.8rem; right: 0.8rem; }
+  .lb-prev { left: 0.6rem; }
+  .lb-next { right: 0.6rem; }
+}
+
+/* lightbox open: the page behind stops scrolling, so the only scrollbar is the picture's own (before, the page's
+   scrollbar sat on top of it and dragging that did nothing visible) */
+html:has(dialog.lb[open]) { overflow: hidden; }
+.lb-stage { overscroll-behavior: contain; }
+
+/* article pictures (the infographics): shown large, uncropped, one per row - readable without clicking */
+.post-photos { display: grid; grid-template-columns: 1fr; gap: 1.6rem; width: min(980px, 94vw); position: relative; left: 50%; transform: translateX(-50%); margin-top: 2.6rem; }
+.post-photos a:hover { transform: none; }
+.post-photos img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; display: block; }
